@@ -1,0 +1,244 @@
+// Variables
+$columns: 12;
+$gutter: 30px;
+$maxWidth: 1200px;
+$redDark: #4A0C4A;
+$redLight: #e20036;
+$mediumWidth: 705px;
+$largeWidth: 960px;
+// Functions
+@function grid-width($cols, $has-gutter:false) {
+    @if $has-gutter {
+        @return calc(((100% / #{$columns}) * #{$cols}) - #{$gutter});
+    }
+    @else {
+        @return calc((100% / #{$columns}) * #{$cols});
+    }
+}
+
+// Mixins
+@mixin columnWidth($gridSize, $i) {
+    .col-#{$gridSize}#{$i} {
+        width: grid-width(#{$i}, true);
+    }
+}
+
+// Globals
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+img {
+    max-width: 100%;
+}
+
+.highlight {
+    color: #e30033;
+}
+
+// Grid
+.row:before,
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@for $i from 1 through $columns {
+    @include columnWidth('sm-', $i);
+}
+
+@media (min-width: $mediumWidth) {
+    @for $i from 1 through $columns {
+        @include columnWidth('md-', $i);
+    }
+}
+
+@media (min-width: $largeWidth) {
+    @for $i from 1 through $columns {
+        @include columnWidth('', $i);
+    }
+    [class*='col-'] {
+        float: right;
+        min-height: 1px;
+        margin: 0 calc(#{$gutter} / 2);
+    }
+}
+
+// Local styles
+nav {
+    height: 44px;
+    width: 100%;
+    background-color: $redDark;
+}
+
+section {
+    margin-bottom: 60px;
+}
+
+.container {
+    max-width: $maxWidth;
+    margin: 0 auto;
+    text-align: center;
+}
+
+[class*='invitation__'],
+[class*='survey__'],
+[class*='footer__'] {
+    clear: both;
+}
+
+#invitation {
+    @media (min-width: $mediumWidth) {
+        margin-bottom: 0;
+    }
+}
+
+.invitation__logo,
+.invitation__packshot {
+    margin: 50px 0 0;
+    @media (min-width: $largeWidth) {
+        text-align: right;
+        margin-top: 15px;
+    }
+}
+
+.invitation__packshot {
+    @media(min-width: $largeWidth) {
+        margin-left: -55px;
+        margin-top: 75px;
+    }
+}
+
+.invitation__text {
+    p {
+        font-size: 1.4em;
+    }
+    @media (min-width: $largeWidth) {
+        text-align: left;
+        p {
+            font-size: 1em;
+        }
+    }
+    h1 {
+        margin: 50px 0;
+        text-transform: uppercase;
+        font-size: 2.5rem;
+        font-style: normal;
+        @media (min-width: $largeWidth) {
+            margin: 30px 0;
+            .indented {
+                margin-left: 50px;
+            }
+        }
+        p {
+            display: inline;
+            font-size: 36px;
+            @media (min-width: $mediumWidth) {
+                display: block;
+            }
+            @media (min-width: $largeWidth) {
+                font-size: 1.4rem;
+            }
+        }
+    }
+}
+
+.invitation__amy {
+    margin: 30px 0 0;
+    @media (min-width: $largeWidth) {
+        margin: 0;
+    }
+}
+
+.survey__title {
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 36px;
+    margin-bottom: 20px;
+    @media (min-width: $largeWidth) {
+        padding-top: 25px;
+    }
+}
+
+.survey__counter {
+    font-size: 48px;
+}
+
+.survey__question {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.survey__click {
+    margin: 0 auto;
+    @media (min-width: $mediumWidth) {
+        width: 66%;
+    }
+    @media (min-width: $largeWidth) {
+        width: 60%;
+    }
+}
+
+.survey__click__radio {
+    input[type="radio"] {
+        opacity: 0;
+        &:focus+label {
+            color: white;
+            background-color: $redLight;
+            border: 1px solid $redLight;
+        }
+    }
+    label {
+        padding: 20px;
+        border: 1px solid black;
+        position: relative;
+        display: block;
+        font-size: 20px;
+        margin: auto;
+        @media (min-width: $largeWidth) {
+            padding: 15px;
+        }
+    }
+    margin-bottom: 50px;
+}
+
+.survey__click__nav {
+    button {
+        color: white;
+        background-color: $redLight;
+        border: 1px solid $redLight;
+        padding: 20px;
+        position: relative;
+        font-size: 1.3rem;
+        font-weight: bold;
+        cursor: pointer;
+        text-transform: uppercase;
+        @media (min-width: $mediumWidth) {
+            margin: 0 20px;
+        }
+        @media (min-width: $largeWidth) {
+            margin: 0;
+        }
+    }
+    .previous {
+        color: black;
+        background-color: white;
+        border: 1px solid black;
+    }
+    @media (min-width: $largeWidth) {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+footer {
+    border-top: 2px solid $redLight;
+    padding-top: 50px;
+    padding-bottom: 30px;
+    font-weight: bold;
+}
