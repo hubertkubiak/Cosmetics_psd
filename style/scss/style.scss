@@ -6,6 +6,7 @@ $redDark: #4A0C4A;
 $redLight: #e20036;
 $mediumWidth: 705px;
 $largeWidth: 960px;
+
 // Functions
 @function grid-width($cols, $has-gutter:false) {
     @if $has-gutter {
@@ -231,7 +232,13 @@ section {
         border: 1px solid black;
     }
     @media (min-width: $largeWidth) {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
         justify-content: space-between;
     }
 }

@@ -265,7 +265,13 @@ section {
   border: 1px solid black; }
 @media (min-width: 960px) {
   .survey__click__nav {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
     justify-content: space-between; } }
 
 footer {
